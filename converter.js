@@ -34,8 +34,8 @@ var Converter = (function () {
     else if(startsWith(type, 'int') || startsWith(type, 'decimal')) {
       return Number(data);
     }
-    else if(startsWith(type, 'tinyint')) {
-      return data == 1;
+    else if(startsWith(type, 'tinyint')||startsWith(type,'timestamp')||startsWith(type,'bigint(20)')) {
+      return data;
     }
     else {
       console.log('Don\'t know this type: ' + type);
@@ -86,6 +86,7 @@ var Converter = (function () {
     var tableName = currentCollection.name;
     var fields = currentCollection.fields;
 
+    var values = [];
     while(hasMoreLines()) {
       var currentLine = getNextLine();
 
@@ -95,7 +96,7 @@ var Converter = (function () {
         var valueId = 0
         var insideString = false;
         var currentValue = '';
-        var values = [];
+
         var pair = {};
 
         while(index < currentLine.length) {
@@ -127,7 +128,7 @@ var Converter = (function () {
         }
 
         _collections[_collections.length - 1].values = values;
-        return;
+        //return;
       }
     }
   };
