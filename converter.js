@@ -34,7 +34,10 @@ var Converter = (function () {
     else if(startsWith(type, 'int') || startsWith(type, 'decimal')) {
       return Number(data);
     }
-    else if(startsWith(type, 'tinyint')||startsWith(type,'timestamp')||startsWith(type,'bigint(20)')) {
+    else if(startsWith(type, 'tinyint')) {
+      return data == 1;
+    }
+    else if(startsWith(type,'timestamp')||startsWith(type,'bigint(20)')) {
       return data;
     }
     else {
